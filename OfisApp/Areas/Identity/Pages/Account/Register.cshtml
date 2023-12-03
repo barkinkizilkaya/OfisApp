@@ -1,0 +1,75 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Register";
+}
+
+<style>
+    /* Custom styling for smaller and curved form fields */
+    .form-floating input,
+    /* .form-floating label {
+        border-radius: 0.2rem;
+        padding: 0.2rem;
+        font-size: 0.8rem;
+    } */
+
+    .btn-primary {
+        border-radius: 0.2rem;
+        padding: 0.25rem 1rem;
+        font-size: 0.9rem;
+    }
+</style>
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="row">
+    <div class="col-md-6">
+        <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+
+            <div class="mb-3">
+                <h5>User Information</h5>
+                <hr />
+            </div>
+
+            <div class="row mb-2">
+                <div class="col">
+                    <label asp-for="Input.Email" class="form-label">Email Address</label>
+                    <input asp-for="Input.Email" class="form-control form-control-sm" autocomplete="username" aria-required="true" />
+                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row mb-2">
+                <div class="col">
+                    <label asp-for="Input.CardNumber" class="form-label">Card Number</label>
+                    <input asp-for="Input.CardNumber" class="form-control form-control-sm" aria-required="true" />
+                </div>
+            </div>
+
+            <div class="row mb-2">
+                <div class="col">
+                    <label asp-for="Input.Password" class="form-label">Password</label>
+                    <input asp-for="Input.Password" class="form-control form-control-sm" autocomplete="new-password" aria-required="true" />
+                    <span asp-validation-for="Input.Password" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row mb-2">
+                <div class="col">
+                    <label asp-for="Input.ConfirmPassword" class="form-label">Confirm Password</label>
+                    <input asp-for="Input.ConfirmPassword" class="form-control form-control-sm" autocomplete="new-password" aria-required="true" />
+                    <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <button id="registerSubmit" type="submit" class="btn btn-primary">Register</button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

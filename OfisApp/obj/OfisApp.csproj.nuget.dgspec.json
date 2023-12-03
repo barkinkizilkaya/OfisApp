@@ -1,26 +1,27 @@
 {
   "format": 1,
   "restore": {
-    "/Users/barkinkizilkaya/Projects/OfisApp/OfisApp/OfisApp.csproj": {}
+    "C:\\Users\\barki\\source\\repos\\OfisApp\\OfisApp\\OfisApp.csproj": {}
   },
   "projects": {
-    "/Users/barkinkizilkaya/Projects/OfisApp/OfisApp/OfisApp.csproj": {
+    "C:\\Users\\barki\\source\\repos\\OfisApp\\OfisApp\\OfisApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/barkinkizilkaya/Projects/OfisApp/OfisApp/OfisApp.csproj",
+        "projectUniqueName": "C:\\Users\\barki\\source\\repos\\OfisApp\\OfisApp\\OfisApp.csproj",
         "projectName": "OfisApp",
-        "projectPath": "/Users/barkinkizilkaya/Projects/OfisApp/OfisApp/OfisApp.csproj",
-        "packagesPath": "/Users/barkinkizilkaya/.nuget/packages/",
-        "outputPath": "/Users/barkinkizilkaya/Projects/OfisApp/OfisApp/obj/",
+        "projectPath": "C:\\Users\\barki\\source\\repos\\OfisApp\\OfisApp\\OfisApp.csproj",
+        "packagesPath": "C:\\Users\\barki\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\barki\\source\\repos\\OfisApp\\OfisApp\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/barkinkizilkaya/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\barki\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
         ],
         "sources": {
-          "/usr/local/share/dotnet/sdk/7.0.311/Sdks/Microsoft.NET.Sdk.Web/library-packs": {},
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -51,6 +52,10 @@
               "target": "Package",
               "version": "[6.0.25, )"
             },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[6.0.23, )"
+            },
             "Microsoft.EntityFrameworkCore.Sqlite": {
               "target": "Package",
               "version": "[6.0.25, )"
@@ -58,6 +63,10 @@
             "Microsoft.EntityFrameworkCore.Tools": {
               "target": "Package",
               "version": "[6.0.25, )"
+            },
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+              "target": "Package",
+              "version": "[6.0.16, )"
             }
           },
           "imports": [
@@ -79,7 +88,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.311/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
         }
       }
     }

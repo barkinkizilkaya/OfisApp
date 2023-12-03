@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OfisApp.Data;
 
@@ -10,9 +11,10 @@ using OfisApp.Data;
 namespace OfisApp.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231203132736_ExtendUserModelAddCardNumber")]
+    partial class ExtendUserModelAddCardNumber
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.25");
@@ -149,36 +151,7 @@ namespace OfisApp.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("OfisApp.Models.DeviceRecord", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<long>("CardNumber")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("CardOwner")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime>("EnterDate")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime>("ExitDate")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("Month")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("Year")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("DeviceRecords");
-                });
-
-            modelBuilder.Entity("OfisApp.Models.IdentityModels.ApplicationUser", b =>
+            modelBuilder.Entity("OfisApp.Models.IdentityModels.ExtendedUser", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("TEXT");
@@ -256,7 +229,7 @@ namespace OfisApp.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("OfisApp.Models.IdentityModels.ApplicationUser", null)
+                    b.HasOne("OfisApp.Models.IdentityModels.ExtendedUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -265,7 +238,7 @@ namespace OfisApp.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("OfisApp.Models.IdentityModels.ApplicationUser", null)
+                    b.HasOne("OfisApp.Models.IdentityModels.ExtendedUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -280,7 +253,7 @@ namespace OfisApp.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("OfisApp.Models.IdentityModels.ApplicationUser", null)
+                    b.HasOne("OfisApp.Models.IdentityModels.ExtendedUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -289,7 +262,7 @@ namespace OfisApp.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("OfisApp.Models.IdentityModels.ApplicationUser", null)
+                    b.HasOne("OfisApp.Models.IdentityModels.ExtendedUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)

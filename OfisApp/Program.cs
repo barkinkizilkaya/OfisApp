@@ -1,6 +1,9 @@
-﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using OfisApp.Data;
+using OfisApp.Interfaces;
+using OfisApp.Models.IdentityModels;
+using OfisApp.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,9 +13,25 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlite(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+builder.Services.AddScoped<IDeviceManager, DeviceManager>();
+
+builder.Services.AddHostedService<OfficeBackgroundService>();
+
+builder.Services.AddDefaultIdentity<ApplicationUser>(options => { options.SignIn.RequireConfirmedAccount = false;
+    options.Password.RequireDigit = false;
+    options.Password.RequiredLength = 6;
+    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequireUppercase = false;
+    options.Password.RequireLowercase = false;
+})
+    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
+
+
+
 builder.Services.AddControllersWithViews();
+builder.Services.AddMemoryCache();
+
 
 var app = builder.Build();
 
