@@ -1,7 +1,9 @@
-﻿namespace OfisApp.Interfaces
+﻿using OfisApp.Models;
+
+namespace OfisApp.Interfaces
 {
     public interface IDeviceManager
     {
-        Task ReadDeviceData();
+        Task<List<DeviceRecord>> ReadDeviceData();
     }
 }

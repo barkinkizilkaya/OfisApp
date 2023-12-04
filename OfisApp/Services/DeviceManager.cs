@@ -1,8 +1,10 @@
-﻿using Microsoft.Extensions.Caching.Memory;
+﻿using Humanizer;
+using Microsoft.Extensions.Caching.Memory;
 using OfisApp.Interfaces;
 using OfisApp.Models;
 using panel_mx;
 using System.Text;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace OfisApp.Services
 {
@@ -24,7 +26,9 @@ namespace OfisApp.Services
 
         public async Task<List<DeviceRecord>> ReadDeviceData()
         {
-            return _memoryCache.GetOrCreate("DeviceData", entry =>
+            return GenerateSampleDeviceRecords();
+
+            return  _memoryCache.GetOrCreate("DeviceData",  entry =>
             {
                 entry.AbsoluteExpiration = DateTime.Now.AddHours(4);
                 entry.SlidingExpiration = TimeSpan.FromDays(4);
@@ -47,10 +51,64 @@ namespace OfisApp.Services
                     record.Year = record.EnterDate.Year;
                     records.Add(record);
                 }
-                return records;
+                return  records;
             });
            
         }
+
+        public List<DeviceRecord> GenerateSampleDeviceRecords()
+        {
+            List<DeviceRecord> deviceRecords = new List<DeviceRecord>();
+
+            // Generate 100 sample records
+            for (int i = 0; i < 100; i++)
+            {
+                DateTime enterDate = DateTime.Now.AddDays(-i); // Adjust as needed for your scenario
+                DateTime exitDate = enterDate.AddHours(8); // Assuming an 8-hour workday
+
+                // Some records can have multiple entries for the same day and same user
+                int numberOfEntries = i % 5 + 1; // Vary the number of entries
+
+                for (int j = 0; j < numberOfEntries; j++)
+                {
+                    DeviceRecord record = new DeviceRecord
+                    {
+                        Id = i * 100 + j + 1, // Unique ID for each record
+                        EnterDate = enterDate,
+                        ExitDate = exitDate,
+                        CardNumber = (i < 5) ? 123456 : 1000 + i, // Card number 123456 for the first 5 records, others vary
+                        CardOwner = $"User{i + 1}", // Sample user name
+                        Year = enterDate.Year,
+                        Month = enterDate.Month
+                    };
+
+                    deviceRecords.Add(record);
+                }
+            }
+
+            // Duplicate some records with different hours
+            foreach (var record in deviceRecords.Where(r => r.CardNumber == 123456).ToList())
+            {
+                for (int k = 0; k < 3; k++)
+                {
+                    DeviceRecord duplicateRecord = new DeviceRecord
+                    {
+                        Id = record.Id + 1000 + k, // Unique ID for each duplicated record
+                        EnterDate = record.EnterDate.AddHours(k + 1), // Different hours for duplicates
+                        ExitDate = record.ExitDate.AddHours(k + 1),
+                        CardNumber = record.CardNumber,
+                        CardOwner = record.CardOwner,
+                        Year = record.Year,
+                        Month = record.Month
+                    };
+
+                    deviceRecords.Add(duplicateRecord);
+                }
+            }
+
+            return deviceRecords;
+        }
+
 
         private static DateTime ExtractDateTime(byte[] deviceData, int i)
         {

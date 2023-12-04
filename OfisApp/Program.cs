@@ -13,7 +13,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlite(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddScoped<IDeviceManager, DeviceManager>();
+builder.Services.AddTransient<IDeviceManager, DeviceManager>();
+builder.Services.AddScoped<IUserService, UserService>();
 
 builder.Services.AddHostedService<OfficeBackgroundService>();
 
